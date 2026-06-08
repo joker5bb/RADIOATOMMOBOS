@@ -1,0 +1,395 @@
+================================================================================
+    RADIOATOMMOBOS - COMPLETE BILL OF MATERIALS (BOM)
+    All Electronic Parts Required to Power On & Boot Microsoft Windows 11
+    Board: ATX 305mm x 244mm | Intel Z890 | Core Ultra 9 285K (LGA1851)
+    FCC ID: 2A8X9-RADIOATOM01
+================================================================================
+
+TABLE OF CONTENTS
+-----------------
+1.  CPU & Socket
+2.  Chipset
+3.  Voltage Regulator Module (VRM) - Core Power Delivery
+4.  Memory Subsystem (DDR5)
+5.  PCIe Expansion Slots
+6.  Storage (M.2 NVMe + SATA)
+7.  Power Input Connectors
+8.  Rear I/O Panel
+9.  Audio Subsystem
+10. Security & TPM 2.0 (Windows 11 Requirement)
+11. Clock Generation
+12. Super I/O & Embedded Controller
+13. BIOS / Firmware
+14. LAN / Networking
+15. USB4 / Thunderbolt
+16. Fan & Thermal Management
+17. Front Panel Headers
+18. Decoupling & Bulk Capacitors
+19. Resistors, Inductors, Ferrite Beads
+20. Transistors, Diodes, MOSFET Drivers
+21. Voltage Regulators (LDOs / Buck)
+22. Debug & Diagnostic
+23. Bottom-Side Components
+24. Mechanical / Connectors / Miscellaneous
+
+================================================================================
+SECTION 1: CPU & SOCKET
+================================================================================
+| Ref | Qty | Description                          | Manufacturer   | Part Number           |
+|-----|-----|--------------------------------------|----------------|-----------------------|
+| U1  | 1   | CPU Socket LGA1851 Interface         | Foxconn        | PE18512-4001-7H       |
+|     | 1   | Intel Core Ultra 9 285K Processor    | Intel          | BX80715285K           |
+|     | 1   | CPU Thermal Solution (LGA1851)       | Intel / 3rd    | LGA1851-TS-HP         |
+
+================================================================================
+SECTION 2: CHIPSET
+================================================================================
+| Ref | Qty | Description                          | Manufacturer   | Part Number           |
+|-----|-----|--------------------------------------|----------------|-----------------------|
+| U2  | 1   | Intel Z890 Platform Controller Hub   | Intel          | GLZ890-SRM50          |
+| U2A | 1   | PCH Voltage Regulator (1.0V)         | Richtek        | RT8231BGQW            |
+|     | 20  | PCH Decoupling MLCC 10uF 6.3V X5R    | Murata         | GRM188R60J106ME84D    |
+|     | 10  | PCH Decoupling MLCC 1uF 6.3V X5R     | TDK            | C1608X5R0J105K        |
+|     | 8   | PCH Decoupling MLCC 0.1uF 16V X7R    | Samsung        | CL10B104KB8NNNC       |
+
+================================================================================
+SECTION 3: VOLTAGE REGULATOR MODULE (VRM) - CORE POWER DELIVERY
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| U1A      | 1   | VRM PWM Controller (20+1+2 Phase)    | Renesas        | RAA229620             |
+| U1A_DRV  | 1   | VRM Gate Driver IC                   | Renesas        | RAA220105             |
+| Q1-Q20   | 20  | High-Side MOSFET (DrMOS / PowerStage)| Infineon       | TDA21490              |
+| Q21-Q40  | 20  | Low-Side MOSFET (DrMOS / PowerStage) | Infineon       | TDA21472              |
+| L1-L20   | 20  | Power Inductor 0.22uH 55A Saturation | Coilcraft      | XGL4020-222MEC        |
+| C1-C20   | 20  | VRM Output MLCC 22uF 6.3V X5R        | Murata         | GRM21BR60J226ME39L    |
+| C21-C35  | 15  | VRM Output MLCC 47uF 6.3V X5R        | TDK            | C3216X5R0J476M        |
+| C36-C50  | 15  | VRM Bulk Capacitor 470uF 2.5V Poly   | Panasonic      | 2R5TPE470M9           |
+| C51-C60  | 10  | VRM Input MLCC 22uF 25V X5R          | Murata         | GRM31CR61E226KE15L    |
+| C61-C70  | 10  | VRM Input MLCC 10uF 25V X5R          | Samsung        | CL21A106KAYNNNE       |
+| C71-C80  | 10  | VRM Bootstrap Cap 0.1uF 50V X7R      | TDK            | C1608X7R1H104K        |
+| C81-C90  | 10  | VRM Phase Compensation 10nF 50V      | Murata         | GRM155R71H103KA88D    |
+| R1-R10   | 10  | VRM Current Sense Resistor 1mOhm 1%  | Susumu         | KRL1632-M-R001-F-T5   |
+| R11-R20  | 10  | VRM Feedback Divider 10kOhm 1%       | Yageo          | RC0603FR-0710KL       |
+| R21-R30  | 10  | VRM Feedback Divider 4.7kOhm 1%      | Yageo          | RC0603FR-074K7L       |
+| FB1-FB5  | 5   | VRM Input Ferrite Bead 30Ohm 6A      | Murata         | BLM31PG300SN1L        |
+
+================================================================================
+SECTION 4: MEMORY SUBSYSTEM (DDR5)
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| J5_A1    | 1   | DDR5 DIMM Slot Channel A1            | TE Conn        | 2309412-1             |
+| J5_A2    | 1   | DDR5 DIMM Slot Channel A2            | TE Conn        | 2309412-1             |
+| J6_B1    | 1   | DDR5 DIMM Slot Channel B1            | TE Conn        | 2309412-1             |
+| J6_B2    | 1   | DDR5 DIMM Slot Channel B2            | TE Conn        | 2309412-1             |
+| U5       | 1   | DDR5 VDDQ Regulator (1.1V)           | Richtek        | RTQ2134BGQW           |
+| U5A      | 1   | DDR5 VPP Regulator (1.8V)            | TI             | TPS51200DRCR          |
+| C121-C130| 10  | DDR5 VDDQ Decoupling 22uF 6.3V       | Murata         | GRM21BR60J226ME39L    |
+| C131-C140| 10  | DDR5 VPP Decoupling 10uF 6.3V        | Samsung        | CL21A106KAYNNNE       |
+| RT1-RT4  | 4   | DDR5 Data Termination 39Ohm 1%       | Yageo          | RC0603FR-0739RL       |
+| RT5-RT8  | 4   | DDR5 Address Termination 39Ohm 1%    | Yageo          | RC0603FR-0739RL       |
+| R31-R38  | 8   | DDR5 ODT Pull-Up 4.7kOhm             | Yageo          | RC0603FR-074K7L       |
+| L21-L24  | 4   | DDR5 VDDQ Inductor Ferrite Bead      | Murata         | BLM18PG121SN1D        |
+
+================================================================================
+SECTION 5: PCIe EXPANSION SLOTS
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| J2       | 1   | PCIe 5.0 x16 Slot (Primary GPU)      | Amphenol       | 10162568-001LF        |
+| J2A      | 1   | PCIe 5.0 Retimer / Redriver          | Texas Instr    | DS160PR810            |
+| J7       | 1   | PCIe 5.0 x16 Slot (Secondary)        | Amphenol       | 10162568-001LF        |
+| J8       | 1   | PCIe 4.0 x1 Slot                     | Amphenol       | 10018783-10110TLF     |
+| C141-C145| 5   | PCIe Decoupling 10uF 16V             | Murata         | GRM21BR61C106KE15L    |
+| C146-C150| 5   | PCIe Decoupling 0.1uF 16V            | Samsung        | CL10B104KB8NNNC       |
+| R39-R42  | 4   | PCIe Presence Detect 2.2kOhm         | Yageo          | RC0603FR-072K2L       |
+
+================================================================================
+SECTION 6: STORAGE (M.2 NVMe + SATA)
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| J3       | 1   | M.2 M-Key Slot (PCIe 5.0 x4)         | TE Conn        | 2199230-4             |
+| J9       | 1   | M.2 M-Key Slot (PCIe 4.0 x4)         | TE Conn        | 2199230-4             |
+| J10      | 1   | M.2 M-Key Slot (PCIe 4.0 x4)         | TE Conn        | 2199230-4             |
+| J29      | 1   | SATA 6Gb/s Connector #1              | Molex          | 0472720001            |
+| J30      | 1   | SATA 6Gb/s Connector #2              | Molex          | 0472720001            |
+| J31      | 1   | SATA 6Gb/s Connector #3              | Molex          | 0472720001            |
+| J32      | 1   | SATA 6Gb/s Connector #4              | Molex          | 0472720001            |
+| C151-C153| 3   | M.2 Decoupling 22uF 6.3V             | Murata         | GRM21BR60J226ME39L    |
+| C154-C156| 3   | M.2 Decoupling 0.1uF 16V             | Samsung        | CL10B104KB8NNNC       |
+
+================================================================================
+SECTION 7: POWER INPUT CONNECTORS
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| J1       | 1   | 24-Pin ATX Main Power Connector      | Molex          | 0442060007            |
+| J11      | 1   | CPU 8-Pin Power Connector #1 (EPS12V)| Molex          | 0039288023            |
+| J12      | 1   | CPU 8-Pin Power Connector #2 (EPS12V)| Molex          | 0039288023            |
+| J13      | 1   | CPU 4-Pin Power Connector (Aux)      | Molex          | 0039284023            |
+| J14      | 1   | PCIe 6+2 Pin Power Connector         | Molex          | 0039012080            |
+| D4-D6    | 3   | Power Input Schottky Diode 5A 40V    | Vishay         | SS54-E3/57T           |
+| F1       | 1   | 24-Pin Polyfuse 10A Hold             | Bourns         | MF-MSMF110-2          |
+| F2-F3    | 2   | CPU 8-Pin Polyfuse 8A Hold           | Bourns         | MF-MSMF080-2          |
+
+================================================================================
+SECTION 8: REAR I/O PANEL
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| J4       | 1   | Dual USB4 Type-C Stacked Port        | Lotes          | ABA-USB-178-K01       |
+| CN1      | 1   | RJ45 2.5GbE LAN Jack (Mag Integrated)| Pulse Elec     | J0B-3563NL            |
+| J15      | 1   | HDMI 2.1 Port                        | Amphenol       | 10029449-001RLF       |
+| J16      | 1   | DisplayPort 1.4 Port                 | Amphenol       | 10029449-001RLF       |
+| J17      | 1   | USB 3.2 Gen2x2 Type-A Block (x4)     | Amphenol       | 10129329-908LF        |
+| J18      | 1   | Audio I/O Block (5 jacks)            | CUI Devices    | SJ-3523-SMT-TR        |
+| J19      | 1   | BIOS Flashback Button                | Alps           | SKRMABE010            |
+| J20      | 1   | CMOS Clear Jumper                    | Harwin         | M20-9980345           |
+| C157-C160| 4   | USB4 ESD Protection TVS Array        | Nexperia       | PESD5V0X1BCSFYL       |
+| C161-C164| 4   | USB3 ESD Protection TVS Array        | Nexperia       | PESD5V0S1BA           |
+
+================================================================================
+SECTION 9: AUDIO SUBSYSTEM
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| U3       | 1   | Realtek ALC4082 Audio Codec          | Realtek        | ALC4082-GR            |
+| U3A      | 1   | Audio Capacitor Array (Nichicon FG)  | Nichicon       | UFG1H221MPM           |
+| U3B      | 1   | Headphone Amplifier (ESS Sabre)      | ESS Tech       | ES9280CPRO            |
+| C165-C170| 6   | Audio Coupling Cap 10uF 16V          | Nichicon       | UFG1C101MPM           |
+| C171-C175| 5   | Audio Filter Cap 1uF 25V             | Wima           | MKS2B041001E00KSSD    |
+| R43-R50  | 8   | Audio Series Resistor 47Ohm          | Yageo          | RC0603FR-0747RL       |
+| L25-L28  | 4   | Audio EMI Filter Ferrite Bead        | Murata         | BLM18PG121SN1D        |
+
+================================================================================
+SECTION 10: SECURITY & TPM 2.0 (WINDOWS 11 MANDATORY)
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| U4       | 1   | Security FPGA (FBGA-256)             | Lattice        | LCMXO3LF-6900C-5BG256C|
+| U4A      | 1   | SPI Flash for FPGA Bitstream         | Winbond        | W25Q128JVSIM          |
+| U9       | 1   | TPM 2.0 Module (Discrete)            | Infineon       | SLB9670XQ2.0          |
+| U9A      | 1   | TPM SPI Interface Header             | Samtec         | TSW-103-07-G-S        |
+| R51-R53  | 3   | TPM Pull-Up 10kOhm                   | Yageo          | RC0603FR-0710KL       |
+| C176     | 1   | TPM Decoupling 0.1uF                 | Samsung        | CL10B104KB8NNNC       |
+| REG1     | 1   | FCC Serialization Label              | RadioAtom      | 2A8X9-RADIOATOM01     |
+
+================================================================================
+SECTION 11: CLOCK GENERATION
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| U6       | 1   | Clock Generator (PCIe/DDR5/CPU)      | Renesas        | 9DBL411BGLF           |
+| U6A      | 1   | 25MHz Crystal Oscillator             | Abracon        | ABM8AIG-25.000MHZ-12-2|
+| C177-C178| 2   | Crystal Load Cap 18pF 50V            | Murata         | GRM1555C1H180JA01D    |
+| R54-R55  | 2   | Crystal Feedback 1MOhm               | Yageo          | RC0603FR-071ML        |
+
+================================================================================
+SECTION 12: SUPER I/O & EMBEDDED CONTROLLER
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| U7       | 1   | Super I/O Controller                 | Nuvoton        | NCT6687D-M            |
+| U8       | 1   | Embedded Controller (EC)             | ITE Tech       | IT5570E-128           |
+| C179-C182| 4   | SIO Decoupling 0.1uF                 | Samsung        | CL10B104KB8NNNC       |
+| C183     | 1   | SIO Decoupling 10uF                  | Murata         | GRM188R60J106ME84D    |
+
+================================================================================
+SECTION 13: BIOS / FIRMWARE
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| U10      | 1   | BIOS SPI Flash ROM 32MB (256Mbit)    | Winbond        | W25Q256JVEIQ          |
+| U10A     | 1   | BIOS Backup Flash 32MB               | Winbond        | W25Q256JVEIQ          |
+| R56      | 1   | BIOS WP Pull-Up 10kOhm               | Yageo          | RC0603FR-0710KL       |
+| R57      | 1   | BIOS Hold Pull-Up 10kOhm             | Yageo          | RC0603FR-0710KL       |
+| C184     | 1   | BIOS Decoupling 0.1uF                | Samsung        | CL10B104KB8NNNC       |
+
+================================================================================
+SECTION 14: LAN / NETWORKING
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| U13      | 1   | Intel i225-V 2.5GbE Controller       | Intel          | WGI225V               |
+| U13A     | 1   | LAN Magnetics Integrated Module      | Pulse Elec     | J0B-3563NL            |
+| C185-C188| 4   | LAN Decoupling 0.1uF                 | Samsung        | CL10B104KB8NNNC       |
+| C189-C190| 2   | LAN Bulk Cap 10uF                    | Murata         | GRM188R60J106ME84D    |
+| R58-R61  | 4   | LAN Termination 49.9Ohm 1%           | Yageo          | RC0603FR-0749R9L      |
+
+================================================================================
+SECTION 15: USB4 / THUNDERBOLT
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| U11      | 1   | USB4 / Thunderbolt 4 Retimer         | Texas Instr    | TUSB1146              |
+| U12      | 1   | USB4 Type-C Controller               | Cypress/Infineon| CYPD6228             |
+| C191-C194| 4   | USB4 Decoupling 0.1uF                | Samsung        | CL10B104KB8NNNC       |
+| C195-C196| 2   | USB4 Bulk Cap 10uF                   | Murata         | GRM188R60J106ME84D    |
+| L29-L32  | 4   | USB4 Common Mode Choke               | Murata         | DLW21SN900HQ2L        |
+
+================================================================================
+SECTION 16: FAN & THERMAL MANAGEMENT
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| J24      | 1   | CPU Fan Header 4-Pin PWM             | Molex          | 0470531000            |
+| J25      | 1   | System Fan Header #1 4-Pin PWM       | Molex          | 0470531000            |
+| J26      | 1   | System Fan Header #2 4-Pin PWM       | Molex          | 0470531000            |
+| J27      | 1   | System Fan Header #3 4-Pin PWM       | Molex          | 0470531000            |
+| J28      | 1   | AIO Pump Header 4-Pin                | Molex          | 0470531000            |
+| Q41-Q45  | 5   | Fan Power Switch MOSFET N-Ch 30V 5A  | Vishay         | SiRA00DP-T1-GE3       |
+| R62-R66  | 5   | Fan Current Sense 0.1Ohm 1%          | Yageo          | RC0603FR-07R1L        |
+| D7-D11   | 5   | Fan Flyback Diode Schottky           | Vishay         | SS14-E3/61T           |
+| RT9-RT13 | 5   | Fan NTC Thermistor 10kOhm            | Murata         | NCP18XH103F03RB       |
+
+================================================================================
+SECTION 17: FRONT PANEL HEADERS
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| J21      | 1   | Front Panel Header (PWR/RST/LED)     | Molex          | 0022283041            |
+| J22      | 1   | Front USB 3.2 Gen1 Header            | Molex          | 0488190101            |
+| J23      | 1   | Front USB 2.0 Header (Dual Port)     | Molex          | 0878311420            |
+| C197-C198| 2   | Front USB Decoupling 0.1uF           | Samsung        | CL10B104KB8NNNC       |
+| R67-R68  | 2   | Front USB D+/- Series 27Ohm          | Yageo          | RC0603FR-0727RL       |
+
+================================================================================
+SECTION 18: DECOUPLING & BULK CAPACITORS (SYSTEM-WIDE)
+================================================================================
+| Ref          | Qty | Description                      | Manufacturer   | Part Number           |
+|--------------|-----|----------------------------------|----------------|-----------------------|
+| C_BULK_470   | 6   | Bulk Aluminum Cap 470uF 16V      | Panasonic      | EEE-FK1C471P          |
+| C_BULK_100   | 8   | Low-ESR Tantalum 100uF 6.3V      | Kemet          | T520D107M006ATE040    |
+| C_MLCC_10U   | 40  | MLCC 10uF 6.3V X5R 0805          | Murata         | GRM21BR60J106ME39L    |
+| C_MLCC_1U    | 30  | MLCC 1uF 6.3V X5R 0603           | TDK            | C1608X5R0J105K        |
+| C_MLCC_100N  | 80  | MLCC 0.1uF 16V X7R 0603          | Samsung        | CL10B104KB8NNNC       |
+| C_MLCC_10N   | 20  | MLCC 10nF 50V X7R 0402           | Murata         | GRM155R71H103KA88D    |
+| C_X2Y_100N   | 10  | X2Y Filter Cap 0.1uF 50V         | Kemet          | X2Y0603104K16R        |
+| C_SI_20N     | 4   | Silicon Deep Cap 0.02uF          | Murata         | LXES15AAA1-133        |
+
+================================================================================
+SECTION 19: RESISTORS, INDUCTORS, FERRITE BEADS
+================================================================================
+| Ref          | Qty | Description                      | Manufacturer   | Part Number           |
+|--------------|-----|----------------------------------|----------------|-----------------------|
+| R_10K_1%     | 50  | Resistor 10kOhm 1% 0603          | Yageo          | RC0603FR-0710KL       |
+| R_4K7_1%     | 30  | Resistor 4.7kOhm 1% 0603         | Yageo          | RC0603FR-074K7L       |
+| R_1K_1%      | 20  | Resistor 1kOhm 1% 0603           | Yageo          | RC0603FR-071KL        |
+| R_100_1%     | 20  | Resistor 100Ohm 1% 0603          | Yageo          | RC0603FR-07100RL      |
+| R_0_0603     | 20  | Zero-Ohm Jumper 0603             | Yageo          | RC0603JR-070RL        |
+| FB_EMI_120   | 15  | Ferrite Bead 120Ohm 0603         | Murata         | BLM18PG121SN1D        |
+| FB_EMI_600   | 10  | Ferrite Bead 600Ohm 0402         | Murata         | BLM15AG601SN1D        |
+| L_BEAD_2A    | 8   | Power Bead 2A 30Ohm              | Murata         | BLM31PG300SN1L        |
+
+================================================================================
+SECTION 20: TRANSISTORS, DIODES, MOSFET DRIVERS
+================================================================================
+| Ref          | Qty | Description                      | Manufacturer   | Part Number           |
+|--------------|-----|----------------------------------|----------------|-----------------------|
+| Q_VRM_DRV    | 1   | VRM Gate Driver IC               | Renesas        | RAA220105             |
+| Q_PWR_SW     | 5   | Power Switch MOSFET N-Ch 30V     | Vishay         | SiRA00DP-T1-GE3       |
+| Q_PCH_PWR    | 1   | PCH Power Switch MOSFET          | Vishay         | SiRA00DP-T1-GE3       |
+| Q_DDR_PWR    | 1   | DDR Power Switch MOSFET          | Vishay         | SiRA00DP-T1-GE3       |
+| D_SCH_5A     | 5   | Schottky Diode 5A 40V SS54       | Vishay         | SS54-E3/57T           |
+| D_SCH_1A     | 10  | Schottky Diode 1A 40V SS14       | Vishay         | SS14-E3/61T           |
+| D_ZENER_3V3  | 5   | Zener Diode 3.3V 500mW           | ON Semi        | MMSZ4684T1G           |
+| D_ZENER_5V1  | 5   | Zener Diode 5.1V 500mW           | ON Semi        | MMSZ4686T1G           |
+| D_LED_GRN    | 3   | Green LED 0603 SMD               | Kingbright     | APT1608ZGC            |
+| D_LED_RED    | 2   | Red LED 0603 SMD                 | Kingbright     | APT1608SECK           |
+| D_LED_YEL    | 1   | Yellow LED 0603 SMD              | Kingbright     | APT1608SYCK           |
+
+================================================================================
+SECTION 21: VOLTAGE REGULATORS (LDOs / BUCK CONVERTERS)
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| U14      | 1   | VCCIO LDO Regulator 1.8V 1A          | TI             | TPS7A4701RGWR         |
+| U15      | 1   | VCCSA Buck Regulator 1.05V 3A        | Richtek        | RTQ2134BGQW           |
+| U16      | 1   | VCCGT Buck Regulator 1.05V 3A        | Richtek        | RTQ2134BGQW           |
+| U17      | 1   | 3.3V Standby LDO 100mA               | TI             | TPS7A1601DGNR         |
+| U18      | 1   | 5V Standby Buck Regulator            | TI             | TPS54331DR            |
+| U19      | 1   | ATX Power Good / Sense Comparator    | TI             | LM393DR               |
+| U20      | 1   | VRM Driver IC (Bottom Side)          | Renesas        | RAA220105             |
+| C198-C202| 5   | LDO Output Cap 10uF 6.3V             | Murata         | GRM188R60J106ME84D    |
+| C203-C207| 5   | LDO Input Cap 1uF 10V                | TDK            | C1608X5R1A105K        |
+| R69-R73  | 5   | LDO Feedback Divider Network         | Yageo          | RC0603FR-0710KL       |
+
+================================================================================
+SECTION 22: DEBUG & DIAGNOSTIC
+================================================================================
+| Ref      | Qty | Description                          | Manufacturer   | Part Number           |
+|----------|-----|--------------------------------------|----------------|-----------------------|
+| J33      | 1   | Debug UART Header 3-Pin              | Samtec         | TSW-103-07-G-S        |
+| D1       | 1   | POST Code LED (Green)                | Kingbright     | APT1608ZGC            |
+| D2       | 1   | Power LED (Green)                    | Kingbright     | APT1608ZGC            |
+| D3       | 1   | Error LED (Red)                      | Kingbright     | APT1608SECK           |
+| SW1      | 1   | Power Button Tactile Switch          | Alps           | SKRMABE010            |
+| SW2      | 1   | Reset Button Tactile Switch          | Alps           | SKRMAAE010            |
+| R74-R76  | 3   | LED Current Limit 1kOhm              | Yageo          | RC0603FR-071KL        |
+
+================================================================================
+SECTION 23: BOTTOM-SIDE COMPONENTS
+================================================================================
+| Ref          | Qty | Description                      | Manufacturer   | Part Number           |
+|--------------|-----|----------------------------------|----------------|-----------------------|
+| C200-C250    | 51  | CPU BGA Bottom Decoupling MLCC   | Murata         | GRM155R60J225ME95D    |
+| C251-C280    | 30  | CPU BGA Bottom 0.1uF MLCC        | Samsung        | CL05B104KO5NNNC       |
+| C281-C300    | 20  | CPU BGA Bottom 1uF MLCC          | TDK            | C1005X5R0J105K        |
+| C301-C320    | 20  | PCH Bottom Decoupling MLCC       | Murata         | GRM155R60J225ME95D    |
+| C321-C350    | 30  | PCH Bottom 0.1uF MLCC            | Samsung        | CL05B104KO5NNNC       |
+| U19          | 1   | ATX Power Good Sense (Bottom)    | TI             | LM393DR               |
+| U20          | 1   | VRM Driver Bottom Mount          | Renesas        | RAA220105             |
+| R77-R85      | 9   | Bottom Pull-Up / Termination     | Yageo          | RC0402FR-0710KL       |
+
+================================================================================
+SECTION 24: MECHANICAL / CONNECTORS / MISC
+================================================================================
+| Ref          | Qty | Description                      | Manufacturer   | Part Number           |
+|--------------|-----|----------------------------------|----------------|-----------------------|
+| ST1-ST5      | 5   | ATX Standoff 6-32 Brass 6.5mm    | Keystone       | 24332                 |
+| ST_SCREW     | 10  | M3x5mm Pan Head Screw            | Standard       | M3x5-PH-SS            |
+| THERMAL_PAD  | 4   | Thermal Pad 1.5mm for VRM        | Fujipoly       | SARCON PG25B          |
+| THERMAL_PASTE| 1   | CPU Thermal Paste 1g Syringe     | Thermal Grizzly| Kryonaut 1g           |
+| I/O_SHIELD   | 1   | Rear I/O Shield (ATX)            | Custom         | RADIOATOM-IO-SHIELD   |
+| PCB          | 1   | 8-Layer PCB 305x244mm 1.6mm      | Custom         | RADIOATOM-PCB-8L      |
+
+================================================================================
+SUMMARY TOTALS
+================================================================================
+| Category                     | Approximate Qty | Notes                              |
+|------------------------------|-----------------|------------------------------------|
+| ICs / Controllers            | 15              | CPU, PCH, VRM, Audio, FPGA, etc.   |
+| MOSFETs (Power Stage)        | 40              | 20 High-Side + 20 Low-Side DrMOS   |
+| Connectors / Headers         | 25              | Power, PCIe, DDR5, M.2, I/O, etc.  |
+| Capacitors (MLCC + Bulk)     | ~300            | Decoupling, bulk, filtering        |
+| Resistors                    | ~200            | Pull-ups, dividers, terminations   |
+| Inductors / Ferrite Beads    | ~50             | Power inductors, EMI filters       |
+| Diodes / LEDs                | ~30             | Schottky, Zener, flyback, status   |
+| Crystals / Oscillators       | 1               | 25MHz system clock                 |
+| Mechanical / Hardware        | ~20             | Standoffs, screws, thermal pads    |
+| PCB                          | 1               | 8-layer controlled-impedance       |
+
+================================================================================
+WINDOWS 11 COMPATIBILITY CHECKLIST
+================================================================================
+[✓] TPM 2.0 Module (Discrete) ............................ U9  SLB9670XQ2.0
+[✓] Secure Boot Support (UEFI + Security FPGA) ........... U4  + U10
+[✓] UEFI BIOS (32MB SPI Flash) ........................... U10 W25Q256JVEIQ
+[✓] CPU: Intel Core Ultra 9 285K (LGA1851) ............... U1  BX80715285K
+[✓] Chipset: Intel Z890 ................................... U2  GLZ890-SRM50
+[✓] Minimum 4GB RAM (4x DDR5 DIMM Slots) ................. J5/J6
+[✓] DirectX 12 GPU Support (PCIe 5.0 x16) ................ J2
+[✓] GPT Partition Support ................................ BIOS UEFI
+[✓] DEP / NX Bit Support ................................. CPU Feature
+
+================================================================================
+DOCUMENT CONTROL
+================================================================================
+System:      RADIOATOMMOBOS-PCB-MAIN-ACT
+Revision:    5.0-FULL-BOM
+Date:        2026-06-08
+FCC ID:      2A8X9-RADIOATOM01
+Target OS:   Microsoft Windows 11 (22H2 / 23H2 / 24H2)
+================================================================================
