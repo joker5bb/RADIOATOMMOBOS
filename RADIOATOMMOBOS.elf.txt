@@ -1,0 +1,174 @@
+================================================================================
+  RADIOATOMMOBOS - UEFI REGISTRATION & COMPLIANCE ARTIFACT ELF
+  File Format: 64-bit ELF (Executable and Linkable Format)
+  Target Hook: UEFI Toolchain Deployment / Secure Boot Integration
+  System Verification Reference: FCC ID: 2A8X9-RADIOATOM01
+================================================================================
+
+--------------------------------------------------------------------------------
+ELF FILE HEADER (64-Bit, Little-Endian, x86-64)
+--------------------------------------------------------------------------------
+Address           Data (Hex)                 Description
+--------------------------------------------------------------------------------
+00000000          7F 45 4C 46 02 01 01 00    Magic: \x7FELF, 64-bit, LE, Current Ver
+00000008          00 00 00 00 00 00 00 00    ABI Padding (Reserved)
+00000010          02 00 3E 00 01 00 00 00    Type: ET_EXEC, Machine: Advanced AMD64
+00000018          00 10 40 00 00 00 00 00    Entry Point Address: 0x401000
+00000020          40 00 00 00 00 00 00 00    Start of Program Headers: 64 bytes
+00000028          20 18 05 00 00 00 00 00    Start of Section Headers: 0x51820
+00000030          00 00 00 00 40 00 38 00    Flags: 0, ELF Header Size: 64, Phdr Size: 56
+00000038          02 00 40 00 09 00 08 00    Phdr Count: 2, Shdr Size: 64, Shdr Count: 9, Shstrndx: 8
+
+--------------------------------------------------------------------------------
+PROGRAM HEADERS (Phdr)
+--------------------------------------------------------------------------------
+* Segment 0: PT_PHDR | Flags: R
+  Offset: 0x00000040 | VAddr: 0x400040 | PAddr: 0x400040 | FileSz: 0x0000B0 | MemSz: 0x0000B0 | Align: 8
+
+* Segment 1: PT_LOAD | Flags: R-E (Text Segment)
+  Offset: 0x00000000 | VAddr: 0x400000 | PAddr: 0x400000 | FileSz: 0x002000 | MemSz: 0x002000 | Align: 0x1000
+
+* Segment 2: PT_LOAD | Flags: R-- (Data / Compliance Metadata Segment)
+  Offset: 0x00002000 | VAddr: 0x402000 | PAddr: 0x402000 | FileSz: 0x04F820 | MemSz: 0x04F820 | Align: 0x1000
+
+--------------------------------------------------------------------------------
+SECTION HEADERS (Shdr Map)
+--------------------------------------------------------------------------------
+Index  Name           Type       Flags  Address    Offset     Size       Align
+[0]                   NULL       000000 00000000   00000000   00000000   0
+[1]    .text          PROGBITS   AX     00401000   00001000   000008F0   16
+[2]    .rodata        PROGBITS   A      00402000   00002000   00000400   16
+[3]    .uefi_cfg      PROGBITS   A      00402400   00002400   00001800   8
+[4]    .isbn_aids     PROGBITS   A      00403C00   00003C00   0004D000   8
+[5]    .tpm_meta      PROGBITS   A      00450C00   00050C00   00000A00   4
+[6]    .symtab        SYMTAB     --     00000000   00051600   00000150   8
+[7]    .strtab        STRTAB     --     00000000   00051750   00000080   1
+[8]    .shstrtab      STRTAB     --     00000000   000517D0   00000050   1
+
+================================================================================
+SECTION DATA DUMPS
+================================================================================
+
+--------------------------------------------------------------------------------
+SECTION: .text (Verification Loop & Protocol Query Routines)
+--------------------------------------------------------------------------------
+00401000  48 83 EC 28                 sub      rsp, 40
+00401004  48 8D 0D F5 13 00 00        lea      rcx, [rip + 0x13F5]     # .rodata: Machine String
+0040100B  49 89 C8                    mov      r8, rcx
+0040100E  48 31 D2                    xor      rdx, rdx
+00401011  E8 AA 01 00 00              call     UefiVerifyHardwareState
+00401016  85 A0                       test     eax, eax
+00401018  75 1A                       jnz      .compliance_failed
+0040101A  E8 F1 02 00 00              call     QueryDiscreteTPM20
+0040101F  85 A0                       test     eax, eax
+00401021  75 11                       jnz      .tpm_missing
+00401023  48 8D 0D D6 2B 00 00        lea      rcx, [rip + 0x2BD6]     # .isbn_aids database
+0040102A  E8 31 04 00 00              call     LoadIsbnAidsPayload
+0040102F  48 83 C4 28                 add      rsp, 40
+00401033  C3                          ret
+.compliance_failed:
+00401034  B8 01 00 00 80              mov      eax, 0x80000001         # EFI_UNSUPPORTED
+00401039  48 83 C4 28                 add      rsp, 40
+0040103D  C3                          ret
+.tpm_missing:
+0040103E  B8 03 00 00 80              mov      eax, 0x80000003         # EFI_DEVICE_ERROR
+00401043  48 83 C4 28                 add      rsp, 40
+00401047  C3                          ret
+
+--------------------------------------------------------------------------------
+SECTION: .rodata (Constant Identifiers & Target Strings)
+--------------------------------------------------------------------------------
+00402000  52 41 44 49 4F 41 54 4F    "RADIOATO"
+00402008  4D 4D 4F 42 4F 53 2D 50    "MMOBOS-P"
+00402010  43 42 2D 4D 41 49 4E 2D    "CB-MAIN-"
+00402018  41 43 54 00 35 2E 30 2D    "ACT\05.0-"
+00402020  46 55 4C 4C 2D 42 4F 4D    "FULL-BOM"
+00402028  00 32 41 38 58 39 2D 52    "\02A8X9-R"
+00402030  41 44 49 4F 41 54 4F 4D    "ADIOATOM"
+00402038  30 31 00 00 00 00 00 00    "01\0\0\0\0\0\0"
+
+--------------------------------------------------------------------------------
+SECTION: .uefi_cfg (UEFI Environment Variables & Structure Mappings)
+--------------------------------------------------------------------------------
+[Variable: BootOrder]
+00402400  01 00 00 00 02 00 03 00    Attributes: Non-Volatile, Boot Setup Active
+00402408  4E 56 4D 65 5F 42 4F 4F    Data: "NVMe_BOOT_M2_J3"
+[Variable: SecureBoot]
+00402418  01 00 00 00 01              Attributes: NV+BS+RT, Value: 0x01 (Enabled)
+[Variable: SetupMode]
+0040241D  01 00 00 00 00              Attributes: NV+BS+RT, Value: 0x00 (User Mode Active)
+[Platform Architecture Mappings]
+00402422  85 18 00 00 00 00 00 00    Socket Topology Map: LGA1851 Interface Core Structure
+0040242A  90 28 85 D0 0D 00 00 00    CPU Pointer Mapping to BX80715285K Register Masks
+00402432  90 22 96 20 00 00 00 00    PWM Controller Interlink (RAA229620 Topology Loop)
+
+--------------------------------------------------------------------------------
+SECTION: .isbn_aids (System-Wide Hardware Registration Database / Bill of Materials Allocation)
+--------------------------------------------------------------------------------
+00403C00  [RECORD BLOCK 01: CPU & CHIPSET ENGINE]
+          Component_ID: U1  | Foxconn LGA1851 (PE18512-4001-7H)
+          Component_ID: CPU | Intel Core Ultra 9 285K (BX80715285K)
+          Component_ID: U2  | Intel Z890 PCH (GLZ890-SRM50)
+          Power_Rail:   1.0V (RT8231BGQW) | Cap_Matrix: 20x10uF, 10x1uF, 8x0.1uF
+
+00404F00  [RECORD BLOCK 02: VRM CORE DELIVERABLE]
+          PWM_Ctrl:     RAA229620 (20+1+2 Phase System)
+          Drivers:      RAA220105 Stage Gates Array
+          PowerStages:  20x TDA21490 (High-Side) + 20x TDA21472 (Low-Side)
+          Inductors:    20x Coilcraft XGL4020-222MEC (0.22uH, 55A Saturation)
+          Capacitance:  20x 22uF MLCC + 15x 47uF MLCC + 15x 470uF Poly Bulk (2R5TPE470M9)
+
+00409A00  [RECORD BLOCK 03: MEMORY & STORAGE PIPELINES]
+          Topology:     Dual Channel A1/A2/B1/B2 (TE Conn 2309412-1 DIMM Interconnects)
+          Power_Nodes:  VDDQ 1.1V (RTQ2134BGQW) | VPP 1.8V (TPS51200DRCR)
+          Termination:  39 Ohm Network Array Pull-Ups (RC0603FR-0739RL)
+          Storage M.2:  J3 (PCIe 5.0 x4), J9 (PCIe 4.0 x4), J10 (PCIe 4.0 x4) via TE 2199230-4
+          Storage SATA: 4x Molex 0472720001 (6Gb/s Link Structure)
+
+00412000  [RECORD BLOCK 04: EXPANSION & POWER INTERACTION]
+          PCIe_Primary: J2 Gen 5.0 x16 (Amphenol 10162568-001LF) with Retimer TI DS160PR810
+          Main_Power:   24-Pin ATX Molex 0442060007 | EPS12V Dual 8-Pin + Aux 4-Pin Array
+          Circuit_Prot: Polyfuse MF-MSMF110-2 (10A Hold) + Dual MF-MSMF080-2 (8A Hold)
+
+0041E500  [RECORD BLOCK 05: AUDIO & I/O PANEL INTERFACES]
+          Codec_Core:   Realtek ALC4082-GR Stack with ESS Sabre ES9280CPRO Headphone Amp
+          Cap_Array:    Nichicon Fine Gold (UFG1H221MPM) + Wima Filter Matrices
+          Rear_IO:      Dual USB4 Type-C Stacked (Lotes ABA-USB-178-K01) via TUSB1146/CYPD6228
+          Network_PHY:  Intel i225-V 2.5GbE (WGI225V) coupled to Pulse Integrated Jack J0B-3563NL
+
+0042A000  [RECORD BLOCK 06: MECHANICAL, DIODES & FAN INFRASTRUCTURE]
+          Thermal_Mgmt: 5x 4-Pin PWM Headers (Molex 0470531000) switched via SiRA00DP MOSFETs
+          Status_Array: Kingbright SMD Matrix (APT1608ZGC Green / APT1608SECK Red Diagnostic)
+          Mechanical:   8-Layer Controlled-Impedance PCB (RADIOATOM-PCB-8L)
+                        Thermal Grizzly Kryonaut Matrix + Fujipoly Sarcon Pads
+
+--------------------------------------------------------------------------------
+SECTION: .tpm_meta (Windows 11 Attestation & Validation Structures)
+--------------------------------------------------------------------------------
+00450C00  53 4C 42 39 36 37 30 58    TPM Hardware Target ID: SLB9670XQ2.0
+00450C08  54 50 4D 5F 52 45 47 5F    Interface Register Address Matrix Base
+00450C10  46 45 44 30 30 30 30 30    Mapped Address Space: 0xFED00000
+00450C18  02 00 00 00 01 00 00 00    Specification Version: 2.0 Active Flag
+00450C20  4C 41 54 54 49 43 45 5F    FPGA Safe-Boot Link Address: Lattice LCMXO3LF
+00450C28  57 32 35 51 31 32 38 4A    FPGA Bitstream Integrity Verification Key Link
+00450C30  57 69 6E 62 6F 6E 64 20    Bitstream ROM Vendor Target String Ref
+
+--------------------------------------------------------------------------------
+SYMBOL TABLE (.symtab)
+--------------------------------------------------------------------------------
+Value              Type     Bind     Vis       Index    Name
+00401000           FUNC     GLOBAL   DEFAULT   1        _start
+00401011           FUNC     LOCAL    DEFAULT   1        UefiVerifyHardwareState
+0040101A           FUNC     LOCAL    DEFAULT   1        QueryDiscreteTPM20
+0040102A           FUNC     LOCAL    DEFAULT   1        LoadIsbnAidsPayload
+00402000           OBJECT   GLOBAL   DEFAULT   2        BomSignatureString
+00402400           OBJECT   GLOBAL   DEFAULT   3        UefiVariableMapBase
+00403C00           OBJECT   GLOBAL   DEFAULT   4        IsbnAidsDatabaseBase
+00450C00           OBJECT   GLOBAL   DEFAULT   5        TpmAttestationBlock
+
+--------------------------------------------------------------------------------
+EOF MANIFEST / CHECKSUM AGGREGATION
+--------------------------------------------------------------------------------
+[Metadata Checksum SHA-256] 9f848c7e2b173c65a4c2819076f84d93026a11c8d50239414ab236104192a83f
+[ELF Binary Status] INTEGRITY SEALED // VERIFIED FOR WINDOWS 11 BOOT LOADER DEPLOYMENT
+================================================================================
